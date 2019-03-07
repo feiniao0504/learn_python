@@ -11,7 +11,7 @@ def count(n):
 
 def main():
     for i in range(5):
-        t = threading.Thread(target=count, args=(i, ))
+        t = threading.Thread(target=count, args=[i, ])
         t.start()
         t.join()
 
