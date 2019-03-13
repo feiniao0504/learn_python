@@ -1,6 +1,4 @@
-import abc
-
-class ObserverBase(abc.ABC):
+class ObserverBase(object):
     def __init__(self, name, subject):
         self.name = name
         self.subject = subject
@@ -16,8 +14,17 @@ class Observer_2(ObserverBase):
 
 class Subject(object):
     def __init__(self):
-        self.state = ""
+        self._state = ""
         self.observer_list = []
+
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        self._state = value
+        self.notify()
 
     def attach(self, o):
         self.observer_list.append(o)
@@ -36,4 +43,3 @@ if __name__ == '__main__':
     s.attach(o1)
     s.attach(o2)
     s.state = "earthquike happening ..."
-    s.notify()
